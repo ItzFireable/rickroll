@@ -1,1 +1,13 @@
-local audio = "https://cdn.discordapp.com/attachments/551398570612490251/1112446530281033889/rickroll.dfpwm"
+local dfpwm = require("cc.audio.dfpwm")
+local speaker = peripheral.find("speaker")
+
+local file = fs.open("my_file.dfpwm", "rb")
+
+local decoder = dfpwm.make_decoder()
+for chunk in io.lines("rickroll.dfpwm", 16 * 1024) do
+    local buffer = decoder(chunk)
+
+    while not speaker.playAudio(buffer) do
+        os.pullEvent("speaker_audio_empty")
+    end
+end
