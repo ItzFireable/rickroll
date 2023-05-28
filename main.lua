@@ -1,8 +1,6 @@
 local dfpwm = require("cc.audio.dfpwm")
 local speaker = peripheral.find("speaker")
 
-local file = fs.open("my_file.dfpwm", "rb")
-
 local decoder = dfpwm.make_decoder()
 for chunk in io.lines("rickroll.dfpwm", 16 * 1024) do
     local buffer = decoder(chunk)
